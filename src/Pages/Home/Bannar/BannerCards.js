@@ -5,8 +5,8 @@ import phone from '../../../assets/icons/phone.svg';
 
 const BannerCards = () => {
     return (
-        <div className='grid lg:grid-cols-3 grid-cols-1 gap-6'>
-            <div className="card bg-gradient-to-r from-secondary to-primary text-base-100 shadow-xl">
+        <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6'>
+            <div className="card bg-gradient-to-r from-secondary to-primary text-base-100">
                 <div className="card-body flex flex-row items-center justify-between w-full px-12 py-8">
                     <div className='mr-5'>
                         <img src={clock} className='' alt="" />
@@ -17,7 +17,7 @@ const BannerCards = () => {
                     </div>
                 </div>
             </div>
-            <div className="card bg-accent text-base-100 shadow-xl">
+            <div className="card bg-accent text-base-100">
                 <div className="card-body flex flex-row items-center justify-between w-full px-12 py-8">
                     <div className='mr-5'>
                         <img src={marker} className='' alt="" />
@@ -28,7 +28,7 @@ const BannerCards = () => {
                     </div>
                 </div>
             </div>
-            <div className="card bg-gradient-to-r from-secondary to-primary text-base-100 shadow-xl">
+            <div className="card bg-gradient-to-r from-secondary to-primary text-base-100">
                 <div className="card-body flex flex-row items-center w-full px-12 py-8">
                     <div className='mr-5'>
                         <img src={phone} className='' alt="" />
