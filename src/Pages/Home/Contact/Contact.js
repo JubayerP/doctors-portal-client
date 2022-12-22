@@ -15,7 +15,7 @@ const Contact = () => {
                 <input type="text" placeholder="subject" className="input input-bordered bg-base-100 focus:outline-0" />
                 <textarea className="textarea bg-base-100 focus:outline-0" placeholder="message"></textarea>
                 <div className='text-center'>
-                <PrimaryButton />
+                <PrimaryButton >Contact</PrimaryButton>
                 </div>
             </div>
         </div>
