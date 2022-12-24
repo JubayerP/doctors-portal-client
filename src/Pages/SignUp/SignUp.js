@@ -1,46 +1,53 @@
-import React, { useContext, useState } from 'react';
-import { useForm } from "react-hook-form";
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
-const Login = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const [show, setShow] = useState(false);
-    const { signIn } = useContext(AuthContext);
+const SignUp = () => {
+    const { register, handleSubmit } = useForm();
+    const { createUser } = useContext(AuthContext);
 
-    const handleLogin = (data) => {
-        signIn(data.email, data.password)
+    const handleSignUp = data => {
+        createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
             })
         .catch(err => console.log(err))
     }
+
     return (
         <div className='h-[500px] flex justify-center items-center'>
             <div className='w-96 p-7'>
-                <h2 className="text-xl text-center">Login</h2>
+                <h2 className="text-xl text-center">Sign Up</h2>
 
-                <form onSubmit={handleSubmit(handleLogin)}>
+                <form onSubmit={handleSubmit(handleSignUp)}>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input {...register('name')} type="text" placeholder="Name" className="input input-bordered w-full max-w-xs" />
+                        
+                    </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input {...register('email', {required: 'Email Address is Required'})} type="email" placeholder="Email" className="input input-bordered w-full max-w-xs" />
-                        {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
+                        <input {...register('email')} type="email" placeholder="Email" className="input input-bordered w-full max-w-xs" />
+                        
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        <input onClick={() => setShow(!show)} {...register('password', {required: true})} type={show ? 'text' : 'password'} placeholder="Password" className="input input-bordered w-full max-w-xs" />
+                        <input {...register('password')} placeholder="Password" className="input input-bordered w-full max-w-xs" />
                         <label className="label">
                             <span className="label-text">Forget Password?</span>
                         </label>
                     </div>
                     <input className='btn btn-accent w-full' type="submit" value={'Login'} />
                 </form>
-                <p>New to Doctors Portal? <Link className='text-secondary' to='/signup'>Create an Accout</Link></p>
+                <p>Already have an account? <Link className='text-secondary' to='/login'>Log In</Link></p>
                 <div className='divider'>OR</div>
                 <button className='btn btn-outline w-full'>Continue With Google</button>
             </div>
@@ -48,4 +55,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
