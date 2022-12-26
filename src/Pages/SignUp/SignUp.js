@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
     const { register, handleSubmit } = useForm();
     const { createUser, updateUsersProfile } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const handleSignUp = data => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 updateUsersProfile(data.name)
-                .then(()=>{})
+                .then(()=>{navigate('/')})
                 .catch((err)=>console.log(err))
             })
         .catch(err => console.log(err))
