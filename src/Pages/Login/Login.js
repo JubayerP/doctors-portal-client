@@ -3,23 +3,29 @@ import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import { useToken } from '../../hooks/useToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [show, setShow] = useState(false);
+    const [loginEmail, setLoginEmail] = useState('')
     const { signIn, providerLogin } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const [token]= useToken(loginEmail)
 
     const from = location.state?.from?.pathname || '/';
     const googleProvider = new GoogleAuthProvider();
+
+    if (token) {
+        navigate(from, {replace: true})
+    }
 
     const handleLogin = (data) => {
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                navigate(from, {replace: true})
+                setLoginEmail(data.email)
             })
         .catch(err => console.log(err))
     }
